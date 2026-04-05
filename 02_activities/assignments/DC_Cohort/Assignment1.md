@@ -209,5 +209,46 @@ Consider, for example, concepts of fariness, inequality, social structures, marg
 
 
 ```
-Your thoughts...
+My Thoughts
+Robert Lu, 2026
+
+Ok first of all, having read the linked article, I find it pretty hard to relate to the issues described in the article, like
+how family ties can restrict whether someone gets an ID. Regarding concepts of fairness, inequality, social structures ...
+these are not things I think about regularly. While there are administrative annoyances in my life, I think overall, 
+things have been good. Maybe I am privileged, or maybe the Canadian ID systems work with less issues.
+
+When I think about databases and data systems in my life ... I'm thinking mostly how my personal info is handled
+and what kinds of data is used to make decisions for/about me. I guess on the personal info side, the first example
+is just general interest profiling? "The Algorithm" which has decided what type of content I'm interested in and
+keeps feeding me more. I think algorithmic content presentation targeted for individuals is a huge societal issue
+which is out of my control. But anyways I think the point is that what I see online isn't strictly within my control 
+- implying that someone/something else gets to decide what I see and thus can influence my thoughts. While I am not 
+free from bias, I would like to be in more control of my thoughts. Thus, I try to reduce doomscrolling.
+
+Another thing maybe related to databases is health insurance? Like whether I'm covered for certain things or not. 
+Maybe this is mostly a political decision - because I'm a grad student, the Student Unions would have negotiated
+these terms. I am not involved in any unions and so some decisions have been made for me. Like I don't get why 
+healthcare can't be free for everyone. And why is dental a different thing than health? For reasons which surely 
+must be historical, I have to think about whether I'm covered for certain procedures or drugs.
+
+Research wise I guess the biggest database of them all is Google Scholar, like the combination of all papers out in 
+the public. I've heard that because "the publishing system" rewards novel and positive results, there is bias in what gets 
+published. I've encountered this personally, having been suggested by co-authors to remove neutral results from a paper.
+Or maybe that's just a reduction to make the flow of the paper more concise. I'm still learning how to write papers.
+But I hear that "the peer review system is close to collapse", leading to many articles sitting on preprint servers
+and not being peer reviewed. Because there's too many papers and reviewers can't handle them. IDK how that affects
+like my research personally, maybe I jsut have to be more skeptical when reading preprints. Or be more accepting
+of preprints because more people are doing it.
+
+A data system that I interact with regularly is the general processing of Nuclear Magnetic Resonance (NMR) spectra.
+These data are processed using custom shell scripts and software. There's nothing wrong with it other than the fact
+that it can be hard to troubleshoot errors without expertise, as some solutions simply aren't online. You need help
+from an experienced NMR researcher to learn how to process NMR data. On the other hand, from my understanding, 
+processing X-ray crystallography and cryoEM data is much easier. Why? Who knows. I don't think NMR data needs
+to be more difficult to understand than the other two. But maybe the difficulty of data processing is a barrier
+of entry to doing NMR. That, and needing million dollar magnets I suppose.
+
+
+
+
 ```

@@ -7,7 +7,8 @@
 /* 1. Write a query that returns everything in the customer table. */
 --QUERY 1
 
-
+SELECT *
+FROM customer;
 
 
 --END QUERY
@@ -18,7 +19,10 @@ sorted by customer_last_name, then customer_first_ name. */
 --QUERY 2
 
 
-
+SELECT *
+FROM customer 
+ORDER BY customer_last_name, customer_first_name
+LIMIT 10;
 
 --END QUERY
 
@@ -28,6 +32,10 @@ sorted by customer_last_name, then customer_first_ name. */
 Limit to 25 rows of output. */
 --QUERY 3
 
+SELECT *
+FROM customer_purchases
+WHERE product_id IN (4,9)
+LIMIT 25;
 
 
 
@@ -43,8 +51,11 @@ Limit to 25 rows of output.
 */
 --QUERY 4
 
-
-
+SELECT *
+, (quantity*cost_to_customer_per_qty) AS price
+FROM customer_purchases
+WHERE customer_id BETWEEN 8 AND 10
+LIMIT 25;
 
 --END QUERY
 
@@ -56,8 +67,15 @@ columns and add a column called prod_qty_type_condensed that displays the word �
 if the product_qty_type is “unit,” and otherwise displays the word “bulk.” */
 --QUERY 5
 
-
-
+SELECT 
+product_id
+, product_name
+, CASE WHEN product_qty_type = 'unit'
+	THEN 'unit'
+	ELSE 'bulk'
+	END AS prod_qty_type_condensed
+	
+FROM product;
 
 --END QUERY
 
@@ -67,7 +85,19 @@ add a column to the previous query called pepper_flag that outputs a 1 if the pr
 contains the word “pepper” (regardless of capitalization), and otherwise outputs 0. */
 --QUERY 6
 
-
+SELECT 
+product_id
+, product_name
+, CASE WHEN product_qty_type = 'unit'
+	THEN 'unit'
+	ELSE 'bulk'
+	END AS prod_qty_type_condensed
+, CASE WHEN product_name LIKE '%pepper%'
+	THEN 1
+	ELSE 0
+	END AS pepper_flag
+	
+FROM product;
 
 
 --END QUERY
@@ -79,7 +109,12 @@ vendor_id field they both have in common, and sorts the result by market_date, t
 Limit to 24 rows of output. */
 --QUERY 7
 
-
+SELECT *
+FROM vendor as v
+INNER JOIN vendor_booth_assignments AS vba
+	ON v.vendor_id = vba.vendor_id
+ORDER BY vba.market_date, v.vendor_name
+LIMIT 24;
 
 
 --END QUERY
@@ -94,7 +129,16 @@ at the farmer’s market by counting the vendor booth assignments per vendor_id.
 --QUERY 8
 
 
+SELECT 
+vba.vendor_id
+, COUNT(booth_number) AS booths_rented_per_vendor
+FROM vendor_booth_assignments AS vba
 
+GROUP BY vba.vendor_id
+ORDER BY vba.vendor_id;
+
+--LEFT JOIN vendor as v
+--	ON v.vendor_id = vba.vendor_id
 
 --END QUERY
 
@@ -106,10 +150,50 @@ of customers for them to give stickers to, sorted by last name, then first name.
 HINT: This query requires you to join two tables, use an aggregate function, and use the HAVING keyword. */
 --QUERY 9
 
+SELECT customer_first_name
+, customer_last_name
+, c.customer_id
+, x.total_spend
+FROM customer as c
 
+INNER JOIN (
+				SELECT customer_id
+				, SUM(quantity*cost_to_customer_per_qty) as total_spend
+				FROM customer_purchases
+				GROUP BY customer_id
+				HAVING total_spend > 2000 -- selects only customers who spent > 2000
+) AS x ON c.customer_id = x.customer_id
+
+ORDER BY c.customer_last_name, c.customer_first_name;
+
+
+
+
+/*
+
+SELECT customer_first_name
+, customer_last_name
+, c.customer_id
+, x.total_spend
+, CASE WHEN x.total_spend > 2000
+	THEN 1
+	ELSE 0
+	END as bumper_sticker_flag
+FROM customer as c
+
+INNER JOIN (
+				SELECT customer_id
+				, SUM(quantity*cost_to_customer_per_qty) as total_spend
+				FROM customer_purchases
+				GROUP BY customer_id
+) AS x ON c.customer_id = x.customer_id
+ORDER BY c.customer_last_name, c.customer_first_name
+*/
 
 
 --END QUERY
+
+
 
 
 --Temp Table
@@ -125,6 +209,25 @@ VALUES(col1,col2,col3,col4,col5)
 */
 --QUERY 10
 
+DROP TABLE IF EXISTS temp.new_vendor;
+
+CREATE TABLE temp.new_vendor AS
+
+SELECT *
+from vendor;
+
+-- get the max vendor_id, put Thomas as the next one
+SELECT MAX(vendor_id) +1 FROM temp.new_vendor;
+-- the output is 10. 
+-- ideally this would be a variable, directly insert the value into the new temp table
+
+
+INSERT INTO temp.new_vendor
+VALUES ('10'
+					, 'Thomass Superfood Store'
+					, 'Fresh Focused'
+					, 'Thomas'
+					, 'Rosenthal');
 
 
 
